@@ -10,6 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Ubiquity - Terraform plan - Staging
+      - name: ECHO TEST
         run: |
-          echo foo
+          echo '{"hello":"world"}'
