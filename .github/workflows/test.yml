@@ -2,6 +2,8 @@ name: test
 on:
   workflow_dispatch:
     inputs:
+      run_id:
+        type: string
       environment:
         type: environment
 
@@ -12,5 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: TEST
+      - name: echo environment
         run: echo ${{ vars.ENVIRONMENT_NAME }}
+        
+      - name: echo run_id
+        run: echo ${{ inputs.run_id }}
