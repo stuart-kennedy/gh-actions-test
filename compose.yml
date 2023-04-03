@@ -1,0 +1,12 @@
+name: hello
+services:
+  system:
+    image: foo123
+    container_name: foo
+    build:
+      context: .docker/foo
+  list:
+    image: bar456
+    container_name: bar
+    build:
+      context: .docker/bar
