@@ -5,8 +5,3 @@ services:
     container_name: foo
     build:
       context: .docker/foo
-  foo123:
-    image: bar456
-    container_name: bar
-    build:
-      context: .docker/bar
