@@ -11,7 +11,13 @@ jobs:
       - name: Docker build
         run: docker compose build
         
-      - name: Docker list images
+      - name: Docker list images 1
+        run: docker images
+        
+      - name: Docker inpsect
+        run: docker inspect foo123
+        
+      - name: Docker list images 2
         run: docker images --filter label=com.docker.compose.project=hello --format "{{.Repository}}"
         
       - name: Configure AWS credentials
