@@ -1,30 +1,15 @@
 name: test
 on:
   workflow_dispatch:
-    inputs:
-      run_id:
-        type: string
-      environment:
-        type: environment
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
     steps:
       - uses: actions/checkout@v3
-
-      - name: echo environment
-        run: echo ${{ vars.ENVIRONMENT_NAME }}
         
-      - name: echo run_id
-        run: echo ${{ inputs.run_id }}
-        
-      - name: Docker pull alpine
-        run: |
-          docker pull alpine
-          docker tag alpine foo
-          docker tag alpine bar
+      - name: Docker build
+        run: docker compose build
         
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -37,7 +22,4 @@ jobs:
         uses: rav2040/ecr-cache-action@main
         with:
           repository-url: 533930369772.dkr.ecr.ap-southeast-2.amazonaws.com/ubiquity-ci-image-cache
-          image-tag: |
-            foo
-            bar
-            
+          image-label: com.docker.compose.project=hello
