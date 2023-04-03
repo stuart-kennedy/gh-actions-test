@@ -22,7 +22,10 @@ jobs:
       - name: ECR action test
         uses: rav2040/ecr-cache-action@main
         with:
-          run_id: ${{ inputs.run_id }}
+          run-id: ${{ inputs.run_id }}
           repository-url: 533930369772.dkr.ecr.ap-southeast-2.amazonaws.com/ubiquity-ci-image-cache
           image-tag: |
             alpine
+ 
+      - name: Docker list
+        run: docker image ls
