@@ -1,4 +1,4 @@
-name: test
+name: pull
 on:
   workflow_dispatch:
     inputs:
@@ -24,8 +24,6 @@ jobs:
         with:
           run-id: ${{ inputs.run_id }}
           repository-url: 533930369772.dkr.ecr.ap-southeast-2.amazonaws.com/ubiquity-ci-image-cache
-          image-tag: |
-            alpine
  
       - name: Docker list
         run: docker image ls
