@@ -21,7 +21,10 @@ jobs:
         run: echo ${{ inputs.run_id }}
         
       - name: Docker pull alpine
-        run: docker pull alpine
+        run: |
+          docker pull alpine
+          docker tag alpine foo
+          docker tag alpine bar
         
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -35,5 +38,6 @@ jobs:
         with:
           repository-url: 533930369772.dkr.ecr.ap-southeast-2.amazonaws.com/ubiquity-ci-image-cache
           image-tag: |
-            alpine
+            foo
+            bar
             
