@@ -1,11 +1,11 @@
 name: hello
 services:
-  system:
+  foo123:
     image: foo123
     container_name: foo
     build:
       context: .docker/foo
-  list:
+  foo123:
     image: bar456
     container_name: bar
     build:
