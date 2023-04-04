@@ -7,18 +7,12 @@ jobs:
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v3
-      
-      - name: docker compose version
-        run: docker compose version
         
-#       - name: Docker build
-#         run: docker compose -p hello build
+      - name: Docker build
+        run: docker compose --project-name="aaaa" build
         
-#       - name: Docker list images 1
-#         run: docker images
-        
-#       - name: Docker inpsect
-#         run: docker inspect foo123
+      - name: Docker inpsect
+        run: docker inspect foo123
         
 #       - name: Docker list images 2
 #         run: docker images --filter label=com.docker.compose.project=hello --format "{{.Repository}}"
