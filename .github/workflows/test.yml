@@ -7,28 +7,31 @@ jobs:
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v3
+      
+      - name: docker compose version
+        run: docker compose version
         
-      - name: Docker build
-        run: docker compose -p hello build
+#       - name: Docker build
+#         run: docker compose -p hello build
         
-      - name: Docker list images 1
-        run: docker images
+#       - name: Docker list images 1
+#         run: docker images
         
-      - name: Docker inpsect
-        run: docker inspect foo123
+#       - name: Docker inpsect
+#         run: docker inspect foo123
         
-      - name: Docker list images 2
-        run: docker images --filter label=com.docker.compose.project=hello --format "{{.Repository}}"
+#       - name: Docker list images 2
+#         run: docker images --filter label=com.docker.compose.project=hello --format "{{.Repository}}"
         
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-southeast-2
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v2
+#         with:
+#           aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: ap-southeast-2
         
-      - name: ECR action test
-        uses: rav2040/ecr-cache-action@main
-        with:
-          repository-url: 533930369772.dkr.ecr.ap-southeast-2.amazonaws.com/ubiquity-ci-image-cache
-          image-label: com.docker.compose.project=hello
+#       - name: ECR action test
+#         uses: rav2040/ecr-cache-action@main
+#         with:
+#           repository-url: 533930369772.dkr.ecr.ap-southeast-2.amazonaws.com/ubiquity-ci-image-cache
+#           image-label: com.docker.compose.project=hello
