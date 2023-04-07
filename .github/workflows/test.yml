@@ -26,7 +26,7 @@ jobs:
         run: rm -rf foo
 
       - name: S3 action pull test
-        uses: rav2040/s3-cache-action@main
+        uses: rav2040/s3-cache-action@v1
         with:
           run-number: ${{ github.run_number }}
           bucket: stuart-s3-cache-test
