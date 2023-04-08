@@ -12,8 +12,8 @@ jobs:
         uses: rav2040/upload-artifact-action@v1
         with:
           path: |
-            .docker/foo
-            .docker/bar
+            .docker/foo/Dockerfile
+            .docker/bar/Dockerfile
           
       - name: Delete local dir
         shell: bash
@@ -23,5 +23,5 @@ jobs:
         uses: rav2040/download-artifact-action@v1
         with:
           path: |
-            .docker/foo
-            .docker/bar
+            .docker/foo/Dockerfile
+            .docker/bar/Dockerfile
