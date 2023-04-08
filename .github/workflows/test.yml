@@ -13,6 +13,7 @@ jobs:
         with:
           path: |
             .docker
+            .docker/foo
           
       - name: Delete local dir
         shell: bash
@@ -23,3 +24,4 @@ jobs:
         with:
           path: |
             .docker
+            .docker/foo
