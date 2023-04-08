@@ -15,19 +15,20 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-southeast-2
         
-      - name: S3 action push test
-        uses: rav2040/s3-cache-action@main
+      - name: push test
+        uses: rav2040/upload-artifact-action@v1
         with:
-          bucket: stuart-s3-cache-test
-          path: foo
+          path: |
+            .docker/foo
+            .docker/bar
           
       - name: Delete local dir
         shell: bash
-        run: rm -rf foo
+        run: rm -rf .docker
 
-      - name: S3 action pull test
-        uses: rav2040/s3-cache-action@v1
+      - name: pull test
+        uses: rav2040/download-artifact-action@v1
         with:
-          run-number: ${{ github.run_number }}
-          bucket: stuart-s3-cache-test
-          path: foo
+          path: |
+            .docker/foo
+            .docker/bar
