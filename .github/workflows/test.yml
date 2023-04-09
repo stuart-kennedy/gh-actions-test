@@ -8,20 +8,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: push test
-        uses: rav2040/upload-artifact-action@v1
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
         with:
+          aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+      
+      - uses: rav2040/s3-cache-action@v1
+        with:
+          bucket: stuart-s3-cache-test
+          key: 123
           path: |
             .docker
-            .docker/foo
-          
-      - name: Delete local dir
-        shell: bash
-        run: rm -rf .docker
-
-      - name: pull test
-        uses: rav2040/download-artifact-action@v1
-        with:
-          path: |
-            .docker
-            .docker/foo
+            foo
