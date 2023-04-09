@@ -15,10 +15,18 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ vars.AWS_REGION }}
       
-      - uses: rav2040/s3-cache-action@v1
+      - uses: rav2040/s3-upload-action@v1
         with:
           bucket: stuart-s3-cache-test
-          key: 123
+          prefix: 1
+          path: |
+            .docker
+            foo
+
+      - uses: rav2040/s3-download-action@main
+        with:
+          bucket: stuart-s3-cache-test
+          prefix: 1
           path: |
             .docker
             foo
