@@ -8,5 +8,6 @@ jobs:
     steps:
       - uses: rav2040/git-tag-action@main
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           tag: test
           message: Test message
