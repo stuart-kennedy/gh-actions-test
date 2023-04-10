@@ -1,0 +1,28 @@
+name: ecr
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+          
+      - run: |
+        docker pull httpd
+        docker tag httpd custom1
+        docker tag httpd custom2
+      
+      - uses: rav2040/ecr-push-action@main
+        with:
+          repository-url: 533930369772.dkr.ecr.ap-southeast-2.amazonaws.com/ubiquity-ci-image-cache 
+          prefix: 123
+          image-tag: |
+            custom1
+            custom2
