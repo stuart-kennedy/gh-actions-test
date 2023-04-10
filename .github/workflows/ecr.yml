@@ -15,9 +15,9 @@ jobs:
           aws-region: ${{ vars.AWS_REGION }}
           
       - run: |
-        docker pull httpd
-        docker tag httpd custom1
-        docker tag httpd custom2
+          docker pull httpd
+          docker tag httpd custom1
+          docker tag httpd custom2
       
       - uses: rav2040/ecr-push-action@main
         with:
