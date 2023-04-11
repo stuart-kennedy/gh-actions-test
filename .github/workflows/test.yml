@@ -16,19 +16,20 @@ jobs:
           ls foo/bar
           ls foo/bar/baz
           
-      - uses: rav2040/upload-artifact-action@main
+      - uses: actions/upload-artifact@v3
         with:
+          name: my-artifact
           path: foo
-            
+
       - run: |
           rm -rf foo
           rm -rf .docker
           ls -al
             
-      - uses: rav2040/download-artifact-action@main
+      - uses: actions/download-artifact@v3
         with:
-          path: foo
-            
+          name: my-artifact
+
       - run: |
           ls foo
           ls foo/bar
