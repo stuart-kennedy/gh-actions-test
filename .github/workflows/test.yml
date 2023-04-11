@@ -8,8 +8,22 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: rav2040/git-tag-action@main
+      - uses: rav2040/upload-artifact-action@main
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: test
-          message: Test message
+          path: |
+            foo
+            .docker
+            
+      - run: |
+          rm -rf foo
+          rm -rf .docker
+          ls -al
+            
+      - uses: rav2040/download-artifact-action@main
+        with:
+          path: |
+            foo
+            .docker
+            
+      - run: |
+          ls -al
