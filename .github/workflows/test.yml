@@ -10,7 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - run: mkdir -p foo/bar/baz/boom
+      - run: |
+          mkdir -p foo/bar/baz/boom
+          ls foo
+          ls foo/bar
+          ls foo/bar/baz
           
       - uses: rav2040/upload-artifact-action@main
         with:
