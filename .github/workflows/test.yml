@@ -1,6 +1,6 @@
 name: test
 
-on: workflow_dispatch
+on: push
 
 jobs:
   build:
@@ -30,4 +30,6 @@ jobs:
           path: foo
             
       - run: |
-          ls -al
+          ls foo
+          ls foo/bar
+          ls foo/bar/baz
