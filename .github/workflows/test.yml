@@ -10,27 +10,37 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+      
       - run: |
           mkdir -p foo/bar/baz/boom
           ls foo
           ls foo/bar
           ls foo/bar/baz
           
-      - uses: actions/upload-artifact@v3
+      - uses: rav2040/s3-upload-action@improvements
         with:
-          name: my-artifact
-          path: foo
+          bucket: stuart-s3-cache-test
+          prefix: my_prefix
+          path: |
+            .docker
+            foo
 
-      - run: |
-          rm -rf foo
-          rm -rf .docker
-          ls -al
+#       - run: |
+#           rm -rf foo
+#           rm -rf .docker
+#           ls -al
             
-      - uses: actions/download-artifact@v3
-        with:
-          name: my-artifact
+#       - uses: actions/download-artifact@v3
+#         with:
+#           name: my-artifact
 
-      - run: |
-          ls foo
-          ls foo/bar
-          ls foo/bar/baz
+#       - run: |
+#           ls foo
+#           ls foo/bar
+#           ls foo/bar/baz
