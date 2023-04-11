@@ -9,12 +9,12 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
+      
+      - run: mkdir -p foo/bar/baz/boom
           
       - uses: rav2040/upload-artifact-action@main
         with:
-          path: |
-            foo
-            .docker
+          path: foo
             
       - run: |
           rm -rf foo
@@ -23,9 +23,7 @@ jobs:
             
       - uses: rav2040/download-artifact-action@main
         with:
-          path: |
-            foo
-            .docker
+          path: foo
             
       - run: |
           ls -al
