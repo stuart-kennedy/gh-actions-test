@@ -11,4 +11,4 @@ jobs:
           name: my_value
           cmd: echo '{"foo":"bar"}'
       
-      - run: echo ${{ steps.step_1.outputs.my_value }}
+      - run: echo ${{ fromJSON(steps.step_1.outputs.my_value).foo }}
