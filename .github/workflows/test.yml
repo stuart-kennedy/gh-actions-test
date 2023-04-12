@@ -36,7 +36,7 @@ jobs:
           rm -rf .docker
           ls -al
             
-      - uses: rav2040/s3-download-action@stream-test
+      - uses: rav2040/s3-download-action@v1
         with:
           bucket: stuart-s3-cache-test
           prefix: my_prefix
