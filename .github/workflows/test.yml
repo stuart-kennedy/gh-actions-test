@@ -23,7 +23,7 @@ jobs:
           ls foo/bar
           ls foo/bar/baz
           
-      - uses: rav2040/s3-upload-action@improvements
+      - uses: rav2040/s3-upload-action@v1
         with:
           bucket: stuart-s3-cache-test
           prefix: my_prefix
@@ -31,16 +31,20 @@ jobs:
             .docker
             foo
 
-#       - run: |
-#           rm -rf foo
-#           rm -rf .docker
-#           ls -al
+      - run: |
+          rm -rf foo
+          rm -rf .docker
+          ls -al
             
-#       - uses: actions/download-artifact@v3
-#         with:
-#           name: my-artifact
+      - uses: rav2040/s3-download-action@v1
+        with:
+          bucket: stuart-s3-cache-test
+          prefix: my_prefix
+          path: |
+            .docker
+            foo
 
-#       - run: |
-#           ls foo
-#           ls foo/bar
-#           ls foo/bar/baz
+      - run: |
+          ls foo
+          ls foo/bar
+          ls foo/bar/baz
