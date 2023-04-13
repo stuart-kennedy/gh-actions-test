@@ -25,7 +25,9 @@ jobs:
         with:
           bucket: stuart-s3-cache-test
           prefix: abc
-          path: foo
+          path: |
+            foo
+            .docker
 
       - run: |
           rm -rf foo
