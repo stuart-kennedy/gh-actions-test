@@ -24,6 +24,7 @@ jobs:
       - uses: rav2040/s3-upload-action@v1
         with:
           bucket: stuart-s3-cache-test
+          prefix: abc
           path: |
             foo
 
@@ -35,6 +36,7 @@ jobs:
       - uses: rav2040/s3-download-action@v1
         with:
           bucket: stuart-s3-cache-test
+          prefix: abc
           path: "*"
 
       - run: |
