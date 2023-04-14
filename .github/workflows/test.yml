@@ -24,6 +24,7 @@ jobs:
       - uses: rav2040/s3-upload-action@archive-test
         with:
           bucket: stuart-s3-cache-test
+          archive: true
           path: |
             foo
             .docker
