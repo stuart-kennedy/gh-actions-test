@@ -21,10 +21,51 @@ jobs:
           ls foo/bar
           ls foo/bar/baz
           
-      - uses: rav2040/s3-upload-action@archive-test
+      - uses: rav2040/s3-archive-upload-action@v1
         with:
           bucket: stuart-s3-cache-test
-          archive: true
+          name: test1.tar
           path: |
             foo
             .docker
+            
+      - uses: rav2040/s3-archive-upload-action@v1
+        with:
+          bucket: stuart-s3-cache-test
+          prefix: abc123
+          name: test2.tgz
+          path: |
+            foo
+            .docker
+          gzip: true
+          
+      - run: |
+          rm -rf foo
+          rm -rf .docker
+          
+      - uses:  rav2040/s3-archive-download-action@v1
+        with:
+          bucket: stuart-s3-cache-test
+          name: test1.tar
+          
+      - run: |
+          ls -al
+          ls -al .docker
+          ls -al foo
+          ls -al foo/bar/baz
+          
+      - run: |
+          rm -rf foo
+          rm -rf .docker
+          
+      - uses:  rav2040/s3-archive-download-action@v1
+        with:
+          bucket: stuart-s3-cache-test
+          prefix: abc123
+          name: test2.tgz
+          
+      - run: |
+          ls -al
+          ls -al .docker
+          ls -al foo
+          ls -al foo/bar/baz
