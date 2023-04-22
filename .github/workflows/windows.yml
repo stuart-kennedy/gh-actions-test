@@ -9,11 +9,7 @@ jobs:
       - id: a
         run: |
           echo "foo=1" >> $GITHUB_OUTPUT
-          echo "bar=C:\" >> $GITHUB_OUTPUT
-          echo "baz=2" >> $GITHUB_OUTPUT
           
       - id: b
         run: |
-          echo ${{ steps.a.outputs.foo }}
-          echo ${{ steps.a.outputs.bar }}          
-          echo ${{ steps.a.outputs.baz }}          
+          echo ${{ steps.a.outputs.foo }}       
