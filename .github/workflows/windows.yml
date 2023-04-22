@@ -4,12 +4,19 @@ on: push
 
 jobs:
   run:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
-      - id: a
+      - name: Find vstest
+        id: vstest
+        shell: bash
         run: |
-          echo "foo=1" >> $GITHUB_OUTPUT
-          
-      - id: b
-        run: |
-          echo ${{ steps.a.outputs.foo }}       
+          $vspath=$(vswhere \
+            -latest \
+            -products * \
+            -requires Microsoft.VisualStudio.Workload.ManagedDesktop Microsoft.VisualStudio.Workload.Web \
+            -requiresAny \
+            -property installationPath)
+          $vstestpath="$vspath\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe"
+          echo "path=$vstestpath" >> $GITHUB_OUTPUT
+        
+      - run: echo ${{ steps.vstest.outputs.path }}
