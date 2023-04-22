@@ -17,6 +17,6 @@ jobs:
             -requiresAny \
             -property installationPath)
           $vstestpath="$vspath\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe"
-          echo "path=$vstestpath" >> $GITHUB_OUTPUT
+          echo 'path="$vstestpath"' >> $GITHUB_OUTPUT
         
       - run: echo ${{ steps.vstest.outputs.path }}
