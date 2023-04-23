@@ -16,7 +16,6 @@ jobs:
             -requires Microsoft.VisualStudio.Workload.ManagedDesktop Microsoft.VisualStudio.Workload.Web \
             -requiresAny \
             -property installationPath)
-          $vstestpath="$vspath\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe"
           echo 'path="\"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\Extensions\TestPlatform\vstest.console.exe\""' >> $GITHUB_OUTPUT
         
       - run: echo ${{ steps.vstest.outputs.path }}
