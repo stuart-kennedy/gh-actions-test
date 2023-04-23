@@ -10,12 +10,12 @@ jobs:
         id: vstest
         shell: bash
         run: |
-          $vspath="$(vswhere \
+          vswhere \
             -latest \
             -products * \
             -requires Microsoft.VisualStudio.Workload.ManagedDesktop Microsoft.VisualStudio.Workload.Web \
             -requiresAny \
-            -property installationPath)"
+            -property installationPath)
         
         
-      - run: echo ${{ steps.vstest.outputs.path }}
+#       - run: echo ${{ steps.vstest.outputs.path }}
