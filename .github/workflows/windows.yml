@@ -6,11 +6,11 @@ jobs:
   run:
     runs-on: windows-latest
     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-#       - name: Set up MSBuild
-#         uses: microsoft/setup-msbuild@v1
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v1
 
       - name: Find vstest
         id: vstest
@@ -22,7 +22,7 @@ jobs:
             -requires Microsoft.VisualStudio.Workload.ManagedDesktop Microsoft.VisualStudio.Workload.Web \
             -requiresAny \
             -property installationPath)
-          echo "path=$vspath\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" >> $GITHUB_OUTPUT
+          echo "path='$vspath\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe'" >> $GITHUB_OUTPUT
         
       - name: Run unit tests
         run: |
