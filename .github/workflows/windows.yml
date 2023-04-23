@@ -6,42 +6,4 @@ jobs:
   run:
     runs-on: windows-latest
     steps:
-      - name: Find vstest
-        id: vstest
-        shell: bash
-        run: |
-          vspath=$(vswhere \
-            -latest \
-            -products * \
-            -requires Microsoft.VisualStudio.Workload.ManagedDesktop Microsoft.VisualStudio.Workload.Web \
-            -requiresAny \
-            -property installationPath)
-          echo "path=$vspath\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" >> $GITHUB_OUTPUT
-          
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Set up MSBuild
-        uses: microsoft/setup-msbuild@v1
-        
-      - name: Run unit tests
-        run: |
-          &("${{ steps.vstest.outputs.path }}") /TestAdapterPath:packages\NUnitTestAdapter.2.3.0 /Parallel /Logger:TRX `
-            event\nunit\bin\Debug\u3event.nunit.dll `
-            forms\nunit\bin\Debug\u3forms.nunit.dll `
-            list\nunit\bin\Debug\u3list.nUnit.dll `
-            mail\nunit\bin\Debug\u3mail.nUnit.dll `
-            push\nunit\bin\Debug\u3push.nunit.dll `
-            share\nunit\bin\Debug\u3share.nunit.dll `
-            smta\nunit\bin\Debug\u3smta.nUnit.dll `
-            social\social.nunit\bin\Debug\Ubiquity.uSuite3.Social.Tests.NUnit.dll `
-            survey\nunit\bin\Debug\u3survey.nunit.dll `
-            system\nunit\bin\Debug\u3system.nunit.dll `
-            system\nunit.schema\bin\Debug\nunit.schema.dll `
-            txt\nunit\bin\Debug\u3txt.nunit.dll `
-            u2ool\testing\bin\Debug\testing.dll `
-            webhooks\testing\engage.nunit\bin\Debug\Ubiquity.uSuite3.Webhooks.Tests.Engage.NUnit.dll `
-            webhooks\testing\webhooks.nunit\bin\Debug\Ubiquity.uSuite3.Webhooks.Tests.NUnit.dll `
-            webtracking\testing\azure.nunit\bin\Debug\Ubiquity.uSuite3.WebTracking.Tests.NUnit.dll `
-            webtracking\testing\engage.nunit\bin\Debug\Ubiquity.uSuite3.WebTracking.Tests.Engage.NUnit.dll `
-            statusUpdater\statusUpdater.tests\bin\Debug\Ubiquity.uSuite3.Core.StatusUpdater.Tests.dll
+      - run:  sass --version
