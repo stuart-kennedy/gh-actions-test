@@ -10,12 +10,6 @@ jobs:
         id: vstest
         shell: bash
         run: |
-          $vspath=$(vswhere \
-            -latest \
-            -products * \
-            -requires Microsoft.VisualStudio.Workload.ManagedDesktop Microsoft.VisualStudio.Workload.Web \
-            -requiresAny \
-            -property installationPath)
           echo 'path="\"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\Extensions\TestPlatform\vstest.console.exe\""' >> $GITHUB_OUTPUT
         
       - run: echo ${{ steps.vstest.outputs.path }}
