@@ -20,4 +20,4 @@ jobs:
         
       - run: |
           $vstestpath = "${{ steps.vstest.outputs.path }}"
-          &(${{ steps.vstest.outputs.path }}) /TestAdapterPath:packages\NUnitTestAdapter.2.3.0 /Parallel /Logger:TRX
+          &("${{ steps.vstest.outputs.path }}") /TestAdapterPath:packages\NUnitTestAdapter.2.3.0 /Parallel /Logger:TRX
