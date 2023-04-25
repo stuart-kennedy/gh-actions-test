@@ -8,7 +8,7 @@ jobs:
     steps:
        - uses: actions/checkout@v3
        
-       - run: aws sts get-caller-identity
+       - run: docker --version
        
        - run: printenv
       
