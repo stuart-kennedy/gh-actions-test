@@ -2,6 +2,9 @@ name: test
 
 on: workflow_dispatch
 
+env:
+  tag_ver: v1.0.7
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,7 +22,7 @@ jobs:
           ls foo/bar
           ls foo/bar/baz
           
-      - uses: stuart-kennedy/actions/s3-archive-upload@v1.0.4
+      - uses: stuart-kennedy/actions/s3-archive-upload@${{ env.tag_ver }}
         with:
           bucket: stuart-s3-cache-test
           name: test1.tar
@@ -27,7 +30,7 @@ jobs:
             foo
             .docker
             
-      - uses: stuart-kennedy/actions/s3-archive-upload@v1.0.4
+      - uses: stuart-kennedy/actions/s3-archive-upload@${{ env.tag_ver }}
         with:
           bucket: stuart-s3-cache-test
           prefix: abc123
@@ -41,7 +44,7 @@ jobs:
           rm -rf foo
           rm -rf .docker
           
-      - uses: stuart-kennedy/actions/s3-archive-download@v1.0.4
+      - uses: stuart-kennedy/actions/s3-archive-download@${{ env.tag_ver }}
         with:
           bucket: stuart-s3-cache-test
           name: test1.tar
@@ -56,7 +59,7 @@ jobs:
           rm -rf foo
           rm -rf .docker
           
-      - uses: stuart-kennedy/actions/s3-archive-download@v1.0.4
+      - uses: stuart-kennedy/actions/s3-archive-download@${{ env.tag_ver }}
         with:
           bucket: stuart-s3-cache-test
           prefix: abc123
