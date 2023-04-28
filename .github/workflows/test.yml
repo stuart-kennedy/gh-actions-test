@@ -6,66 +6,64 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
-       - run: sleep 60
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
       
-#       - name: Configure AWS credentials
-#         uses: aws-actions/configure-aws-credentials@v2
-#         with:
-#           aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
-#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#           aws-region: ${{ vars.AWS_REGION }}
-      
-#       - run: |
-#           mkdir -p foo/bar/baz/boom
-#           ls foo
-#           ls foo/bar
-#           ls foo/bar/baz
+      - run: |
+          mkdir -p foo/bar/baz/boom
+          ls foo
+          ls foo/bar
+          ls foo/bar/baz
           
-#       - uses: rav2040/s3-archive-upload-action@v1
-#         with:
-#           bucket: stuart-s3-cache-test
-#           name: test1.tar
-#           path: |
-#             foo
-#             .docker
+      - uses: stuart-kennedy/actions/s3-archive-upload@v1.0.1
+        with:
+          bucket: stuart-s3-cache-test
+          name: test1.tar
+          path: |
+            foo
+            .docker
             
-#       - uses: rav2040/s3-archive-upload-action@v1
-#         with:
-#           bucket: stuart-s3-cache-test
-#           prefix: abc123
-#           name: test2.tgz
-#           path: |
-#             foo
-#             .docker
-#           gzip: true
+      - uses: stuart-kennedy/actions/s3-archive-upload@v1.0.1
+        with:
+          bucket: stuart-s3-cache-test
+          prefix: abc123
+          name: test2.tgz
+          path: |
+            foo
+            .docker
+          gzip: true
           
-#       - run: |
-#           rm -rf foo
-#           rm -rf .docker
+      - run: |
+          rm -rf foo
+          rm -rf .docker
           
-#       - uses:  rav2040/s3-archive-download-action@v1
-#         with:
-#           bucket: stuart-s3-cache-test
-#           name: test1.tar
+      - uses: stuart-kennedy/actions/s3-archive-download@v1.0.1
+        with:
+          bucket: stuart-s3-cache-test
+          name: test1.tar
           
-#       - run: |
-#           ls -al
-#           ls -al .docker
-#           ls -al foo
-#           ls -al foo/bar/baz
+      - run: |
+          ls -al
+          ls -al .docker
+          ls -al foo
+          ls -al foo/bar/baz
           
-#       - run: |
-#           rm -rf foo
-#           rm -rf .docker
+      - run: |
+          rm -rf foo
+          rm -rf .docker
           
-#       - uses:  rav2040/s3-archive-download-action@v1
-#         with:
-#           bucket: stuart-s3-cache-test
-#           prefix: abc123
-#           name: test2.tgz
+      - uses: stuart-kennedy/actions/s3-archive-download@v1.0.1
+        with:
+          bucket: stuart-s3-cache-test
+          prefix: abc123
+          name: test2.tgz
           
-#       - run: |
-#           ls -al
-#           ls -al .docker
-#           ls -al foo
-#           ls -al foo/bar/baz
+      - run: |
+          ls -al
+          ls -al .docker
+          ls -al foo
+          ls -al foo/bar/baz
