@@ -14,28 +14,27 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ vars.AWS_REGION }}
           
-#       - run: |
-#           docker pull httpd
-#           docker tag httpd system:9.999.9.99999
+      - run: |
+          docker pull httpd
+          docker tag httpd system:9.999.9.99999
       
+      - uses: stuart-kennedy/actions/ecr-push@v1.0.18
+        with:
+          repository-url: 533930369772.dkr.ecr.ap-southeast-2.amazonaws.com/ubiquity-ci-image-cache 
+          image: system:9.999.9.99999
+          tags: |
+            latest
+            foo
+            
 #       - uses: rav2040/ecr-docker-action@main
 #         with:
-#           action: push
+#           action: pull
 #           repository-url: 533930369772.dkr.ecr.ap-southeast-2.amazonaws.com/ubiquity-ci-image-cache 
-#           image: system:9.999.9.99999
+#           image: system
 #           tags: |
-#             latest
+#             9.999.9.99999
 #             foo
-            
-      - uses: rav2040/ecr-docker-action@main
-        with:
-          action: pull
-          repository-url: 533930369772.dkr.ecr.ap-southeast-2.amazonaws.com/ubiquity-ci-image-cache 
-          image: system
-          tags: |
-            9.999.9.99999
-            foo
-            bar
+#             bar
 
-      - run: |
-          docker image ls
+#       - run: |
+#           docker image ls
