@@ -19,7 +19,8 @@ jobs:
           branches=$(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/')
           for branch in $branches; do \
             if [[ ${branch/release\//} > ${currentBranch/release\//} ]]; then \
-              echo "Branch is: $branch"
+              branchSha=$(gh api /repos/${{ github.repository }}/branches/$branch)
+              echo "branchSha is: $branchSha"
               gh api /repos/${{ github.repository }}/merges \
                 -f base='$branch' \
                 -f head='${{ github.sha }}'
