@@ -21,7 +21,7 @@ jobs:
             if [[ ${branch/release\//} > ${currentBranch/release\//} ]]; then \
               echo "Branch name is: $branch"
               gh api /repos/${{ github.repository }}/merges \
-                -f base='$branch' \
+                -f base=$branch \
                 -f head='${{ github.sha }}'
             fi
           done
