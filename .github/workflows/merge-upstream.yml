@@ -15,13 +15,14 @@ jobs:
     name: Merge
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.base }}
+    
       - name: Configure git user
         run: |
           git config --global user.name github-actions[bot]
           git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
-
-      - name: Checkout base
-        run: git checkout ${{ inputs.base }}
 
       - name: Checkout head
         run: git checkout ${{ inputs.head }}
