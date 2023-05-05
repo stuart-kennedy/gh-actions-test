@@ -16,13 +16,21 @@ jobs:
         run: |
           currentBranch=${{ github.ref_name }}
           branches=$(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/')
-          for branch in $branches; do \
-            if [[ ${branch/release\//} > ${currentBranch/release\//} ]]; then \
-              curl -L \
-                -X POST \
-                -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}"\
-                -H "X-GitHub-Api-Version: 2022-11-28" \
-                https://api.github.com/repos/${{ github.repository }}/actions/workflows/merge-upstream.yml/dispatches \
-                -d '{"ref":"${{ github.ref }}","inputs":{"base":"'$currentBranch'","head":"'$branch'"}}'
-            fi
-          done
+          IFS=', ' read -r -a array <<< "$branches"
+          echo "${array[0]}"
+
+#       - name: Merge to downstream release branches
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         run: |
+#           currentBranch=${{ github.ref_name }}
+#           branches=$(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/')
+#           for branch in $branches; do \
+#             if [[ ${branch/release\//} > ${currentBranch/release\//} ]]; then \
+#               curl -L -X POST \
+#                 -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}"\
+#                 -H "X-GitHub-Api-Version: 2022-11-28" \
+#                 https://api.github.com/repos/${{ github.repository }}/actions/workflows/merge-upstream.yml/dispatches \
+#                 -d '{"ref":"${{ github.ref }}","inputs":{"base":"'$currentBranch'","head":"'$branch'"}}'
+#             fi
+#           done
