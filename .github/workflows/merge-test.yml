@@ -25,4 +25,4 @@ jobs:
                 https://api.github.com/repos/${{ github.repository }}/actions/workflows/merge-upstream.yml/dispatches \
                 -d '{"ref":"${{ github.ref }}","inputs":{"base":"'$branch'","head":"'$currentBranch'"}}'
             fi
-          don
+          done
