@@ -43,5 +43,5 @@ jobs:
         run: |
           git fetch
           git checkout ${{ inputs.head }}
-          git merge ${{ inputs.base }} --commit -m "Merge upstream branch to ${{ inputs.head }} [skip ci]"
+          git merge ${{ inputs.base }}
           git push
