@@ -15,23 +15,26 @@ jobs:
     name: Merge
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout base
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.base }}
+#       - name: Checkout base
+#         uses: actions/checkout@v3
+#         with:
+#           ref: ${{ inputs.base }}
     
       - name: Configure git user
         run: |
           git config --global user.name github-actions[bot]
           git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
 
-      - name: Checkout head
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.head }}
+#       - name: Checkout head
+#         uses: actions/checkout@v3
+#         with:
+#           ref: ${{ inputs.head }}
 
       - name: Merge and push
         run: |
-          git fetch --all
+          git checkout ${{ inputs.base }}
+          git pull
+          git checkout ${{ inputs.head }}
+          git pull
           git merge ${{ inputs.base }} --commit -m "Merge upstream branch to ${{ inputs.base }} [skip ci]"
           git push
