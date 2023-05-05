@@ -9,8 +9,6 @@ jobs:
   post_build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-    
       - name: Merge to downstream release branches
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
