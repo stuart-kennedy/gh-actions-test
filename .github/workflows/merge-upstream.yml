@@ -27,10 +27,10 @@ jobs:
 #           git config --global user.name github-actions[bot]
 #           git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
 
-#       - name: Checkout head
-#         uses: actions/checkout@v3
-#         with:
-#           ref: ${{ inputs.head }}
+      - name: Checkout head
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.head }}
 
 #       - name: Merge and push
 #         run: |
@@ -42,6 +42,5 @@ jobs:
       - name: Merge and push
         run: |
           git fetch
-          git checkout ${{ inputs.head }}
-          git merge ${{ inputs.base }}
+          git merge ${{ inputs.base }} 
           git push
