@@ -14,19 +14,33 @@ jobs:
   merge:
     name: Merge
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Configure git user
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-
       - name: Checkout base
-        run: git checkout ${{ inputs.base }}
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.base }}
+    
+#       - name: Configure git user
+#         run: |
+#           git config --global user.name github-actions[bot]
+#           git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
 
       - name: Checkout head
-        run: git checkout ${{ inputs.head }}
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.head }}
+
+#       - name: Merge and push
+#         run: |
+#           git fetch origin ${{ inputs.head }}
+#           git checkout ${{ inputs.head }}
+#           git merge ${{ inputs.base }} --commit -m "Merge upstream branch to ${{ inputs.head }} [skip ci]"
+#           git push
 
       - name: Merge and push
         run: |
-          git merge ${{ inputs.base }} --commit -m "Merge upstream branch to ${{ inputs.base }} [skip ci]"
+          git fetch
+          git merge ${{ inputs.base }} 
           git push
