@@ -37,8 +37,6 @@ jobs:
           gh repo clone ${{ github.repository }}
           cd gh-actions-test
           git checkout ${{ inputs.base }}
-          git pull
           git checkout ${{ inputs.head }}
-          git pull
           git merge ${{ inputs.base }} --commit -m "Merge upstream branch to ${{ inputs.base }} [skip ci]"
           git push
