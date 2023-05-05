@@ -8,7 +8,6 @@ on:
 jobs:
   post_build:
     runs-on: ubuntu-latest
-    permissions: write-all
     steps:
       - name: Merge to downstream release branches
         env:
@@ -18,8 +17,6 @@ jobs:
           branches=$(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/')
           for branch in $branches; do \
             if [[ ${branch/release\//} > ${currentBranch/release\//} ]]; then \
-              gh api /repos/${{ github.repository }}/merges \
-                -f base=$branch \
-                -f head='${{ github.sha }}'
+              gh workflow run merge-upstream.yml -f base=$branch -f head=${{ github.sha }}
             fi
           done
