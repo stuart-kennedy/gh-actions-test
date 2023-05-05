@@ -32,19 +32,11 @@ jobs:
 #         with:
 #           ref: ${{ inputs.head }}
 
-#       - name: Merge and push
-#         run: |
-#           gh repo clone ${{ github.repository }}
-#           cd gh-actions-test
-#           git checkout ${{ inputs.base }}
-#           git checkout ${{ inputs.head }}
-#           git merge ${{ inputs.base }} --commit -m "Merge upstream branch to ${{ inputs.base }} [skip ci]"
-#           git push
-
       - name: Merge and push
         run: |
-          git fetch
+          gh repo clone ${{ github.repository }} -- foo
+          cd foo
+          git checkout ${{ inputs.base }}
           git checkout ${{ inputs.head }}
-          git pull
           git merge ${{ inputs.base }} --commit -m "Merge upstream branch to ${{ inputs.base }} [skip ci]"
           git push
