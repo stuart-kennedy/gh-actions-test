@@ -7,6 +7,7 @@ on:
 
 jobs:
   post_build:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Merge to downstream release branches
