@@ -36,5 +36,6 @@ jobs:
         run: |
           git fetch origin ${{ inputs.head }}
           git checkout ${{ inputs.head }}
+          git pull
           git merge ${{ inputs.base }} --commit -m "Merge upstream branch to ${{ inputs.base }} [skip ci]"
           git push
