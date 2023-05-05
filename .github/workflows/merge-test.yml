@@ -15,7 +15,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           currentBranch=${{ github.ref_name }}
-          gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/'
+          gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/' | sort -r
           IFS=', ' read -r -a arr <<< $(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/')
           echo "${arr[@]}"
           printf '%s\n' "${arr[@]}" | sort -r
