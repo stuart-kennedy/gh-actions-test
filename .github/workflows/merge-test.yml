@@ -15,8 +15,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           currentBranch=${{ github.ref_name }}
-          readarray -t branches < <(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/' | sort -r)
-          echo "${branches[@]}"
+          readarray -t branches < <(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/' | sort)
+          for branch in "${branches[@]}"; do \
+            if [[ ${branch/release\//} > ${currentBranch/release\//} ]]; then \
+              echo $branch
+            fi
+          done
           
 
 #       - name: Merge to downstream release branches
