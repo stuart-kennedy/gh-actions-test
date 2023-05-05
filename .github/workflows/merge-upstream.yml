@@ -32,10 +32,16 @@ jobs:
 #         with:
 #           ref: ${{ inputs.head }}
 
+#       - name: Merge and push
+#         run: |
+#           git fetch origin ${{ inputs.head }}
+#           git checkout ${{ inputs.head }}
+#           git merge ${{ inputs.base }} --commit -m "Merge upstream branch to ${{ inputs.head }} [skip ci]"
+#           git push
+
       - name: Merge and push
         run: |
-          git fetch origin ${{ inputs.head }}
+          git fetch
           git checkout ${{ inputs.head }}
-          git pull
-          git merge ${{ inputs.base }} --commit -m "Merge upstream branch to ${{ inputs.base }} [skip ci]"
+          git merge ${{ inputs.base }} --commit -m "Merge upstream branch to ${{ inputs.head }} [skip ci]"
           git push
