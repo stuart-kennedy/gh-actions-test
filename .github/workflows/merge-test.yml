@@ -10,9 +10,9 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
-      - name: Merge to downstream release branches
+      - name: Merge to downstream branch
         env:
-          GITHUB_TOKEN: ${{ secrets.TEST_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           currentBranch=${{ github.ref_name }}
           readarray -t branches < <(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/' | sort)
@@ -25,11 +25,3 @@ jobs:
               break
             fi
           done
-
-
-
-#               curl -L -X POST \
-#                 -H "Authorization: Bearer ${{ secrets.TEST_TOKEN }}"\
-#                 -H "X-GitHub-Api-Version: 2022-11-28" \
-#                 https://api.github.com/repos/${{ github.repository }}/merges \
-#                 -d '{"base":"'$branch'","head":"'$currentBranch'","commit_message":"Merge '$currentBranch' branch to '$branch'"}'
