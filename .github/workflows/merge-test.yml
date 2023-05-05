@@ -18,11 +18,18 @@ jobs:
           readarray -t branches < <(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/' | sort)
           for branch in "${branches[@]}"; do \
             if [[ ${branch/release\//} > ${currentBranch/release\//} ]]; then \
-              curl -L -X POST \
-                -H "Authorization: Bearer ${{ secrets.TEST_TOKEN }}"\
-                -H "X-GitHub-Api-Version: 2022-11-28" \
-                https://api.github.com/repos/${{ github.repository }}/merges \
-                -d '{"base":"'$branch'","head":"'$currentBranch'","commit_message":"Merge '$currentBranch' branch to '$branch'"}'
+              gh api /repos/${{ github.repository }}/merges \
+                -f base=$branch \
+                -f head=$currentBranch \
+                -f commit_message="Merge $currentBranch into $branch" 
               break
             fi
           done
+
+
+
+#               curl -L -X POST \
+#                 -H "Authorization: Bearer ${{ secrets.TEST_TOKEN }}"\
+#                 -H "X-GitHub-Api-Version: 2022-11-28" \
+#                 https://api.github.com/repos/${{ github.repository }}/merges \
+#                 -d '{"base":"'$branch'","head":"'$currentBranch'","commit_message":"Merge '$currentBranch' branch to '$branch'"}'
