@@ -17,10 +17,10 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Checkout base
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.base }}
+#       - name: Checkout base
+#         uses: actions/checkout@v3
+#         with:
+#           ref: ${{ inputs.base }}
     
       - name: Configure git user
         run: |
