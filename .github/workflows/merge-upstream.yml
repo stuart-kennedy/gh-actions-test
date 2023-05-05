@@ -1,0 +1,32 @@
+name: Downstream merge
+
+on:
+  workflow_dispatch:
+    inputs:
+      base:
+        type: string
+        required: true
+      head:
+        type: string
+        required: true
+
+jobs:
+  merge:
+    name: Merge
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure git user
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+      - name: Checkout base
+        run: git checkout ${{ inputs.base }}
+
+      - name: Checkout head
+        run: git checkout ${{ inputs.head }}
+
+      - name: Merge and push
+        run: |
+          git merge ${{ inputs.base }} --commit -m "Merge upstream branch to ${{ inputs.base }} [skip ci]"
+          git push
