@@ -17,7 +17,7 @@ jobs:
           currentBranch=${{ github.ref_name }}
           IFS=', ' read -r -a arr <<< $(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/' | sort)
           echo "${arr[@]}"
-          readarray -d '' -a arr1 < <(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/' | sort)
+          readarray -d '' -t arr1 < <(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/' | sort)
           echo "${arr1[@]}"
           
 
