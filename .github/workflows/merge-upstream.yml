@@ -17,10 +17,10 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-#       - name: Checkout base
-#         uses: actions/checkout@v3
-#         with:
-#           ref: ${{ inputs.base }}
+      - name: Checkout base
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.base }}
     
       - name: Configure git user
         run: |
@@ -41,10 +41,7 @@ jobs:
 
       - name: Merge and push
         run: |
-          gh repo clone ${{ github.repository }} -- foo
-          cd foo
           git fetch
-          git checkout ${{ inputs.base }}
           git checkout ${{ inputs.head }}
           git merge ${{ inputs.base }} --commit -m "Merge upstream branch to ${{ inputs.head }} [skip ci]"
           git push
