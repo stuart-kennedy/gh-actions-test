@@ -22,10 +22,10 @@ jobs:
         with:
           ref: ${{ inputs.base }}
     
-      - name: Configure git user
-        run: |
-          git config --global user.name github-actions[bot]
-          git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
+#       - name: Configure git user
+#         run: |
+#           git config --global user.name github-actions[bot]
+#           git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
 
 #       - name: Checkout head
 #         uses: actions/checkout@v3
