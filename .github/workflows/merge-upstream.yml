@@ -34,8 +34,6 @@ jobs:
 
       - name: Merge and push
         run: |
-          git fetch origin ${{ inputs.base }}
-          git checkout ${{ inputs.base }}
           git fetch origin ${{ inputs.head }}
           git checkout ${{ inputs.head }}
           git merge ${{ inputs.base }} --commit -m "Merge upstream branch to ${{ inputs.base }} [skip ci]"
