@@ -32,6 +32,7 @@ jobs:
 
       - name: Merge and push
         run: |
+          gh repo clone ${{ github.repository }}
           git checkout ${{ inputs.base }}
           git pull
           git checkout ${{ inputs.head }}
