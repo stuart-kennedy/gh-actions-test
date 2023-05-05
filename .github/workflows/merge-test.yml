@@ -15,10 +15,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           currentBranch=${{ github.ref_name }}
-          IFS=', ' read -r -a arr <<< $(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/' | sort)
-          echo "${arr[@]}"
-          readarray -d '' -t arr1 < <(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/' | sort)
-          echo "${arr1[@]}"
+          readarray -t branches < <(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/' | sort)
           
 
 #       - name: Merge to downstream release branches
