@@ -17,6 +17,6 @@ jobs:
           branches=$(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/')
           for branch in $branches; do \
             if [[ ${branch/release\//} > ${currentBranch/release\//} ]]; then \
-              gh workflow run merge-upstream.yml -f base=$branch -f head=${{ github.sha }}
+              echo $branch
             fi
           done
