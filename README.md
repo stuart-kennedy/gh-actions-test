@@ -1,4 +1,3 @@
 # gh-actions-test
 
-testing
-123
+test
