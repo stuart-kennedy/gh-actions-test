@@ -19,7 +19,7 @@ jobs:
 
       - name: Generate app token
         id: app_auth
-        uses: stuart-kennedy/actions/github-app-auth@v1.0.7
+        uses: stuart-kennedy/actions/github-app-auth@v1.0.10
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
