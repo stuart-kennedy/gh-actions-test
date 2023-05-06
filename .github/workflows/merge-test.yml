@@ -25,7 +25,9 @@ jobs:
           echo "head=$head" >> $GITHUB_OUTPUT
           readarray -t branches < <(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/' | sort)
           for branch in "${branches[@]}"; do \
+            echo "ONE: $branch"
             if [[ ${branch/release\//} > ${head/release\//} ]]; then \
+              echo "TWO: $branch"
               echo "base=$branch" >> $GITHUB_OUTPUT; break
             fi
           done
