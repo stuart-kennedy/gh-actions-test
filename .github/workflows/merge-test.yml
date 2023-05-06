@@ -16,7 +16,8 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
           
-      - name: Merge to downstream branch TEST
+      - name: Merge to downstream branch
+        id: auto_merge
         env:
           GITHUB_TOKEN: ${{ steps.app_auth.outputs.token }}
         run: |
@@ -31,3 +32,15 @@ jobs:
               break
             fi
           done
+          
+      - name: Create PR to merge to downstream branch
+        if: steps.auto_merge.outcome == 'failure'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api /repos/${{ github.repository }}/pulls \
+            -f base=$branch \
+            -f head=$currentBranch \
+            -f title="Merge '$currentBranch' into '$branch'" \
+            -f body="This pull request was automatically created as a result of a failed downstream auto-merge."
+
