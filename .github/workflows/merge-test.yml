@@ -20,7 +20,7 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - name: Determine base and head branches
+      - name: Determine next downstream branch
         id: branches
         run: |
           head=${{ github.ref_name }}
@@ -36,6 +36,7 @@ jobs:
 
       - name: Merge to downstream branch
         id: auto_merge
+        if: steps.branches.outputs.base != ''
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ steps.app_auth.outputs.token }}
@@ -48,7 +49,7 @@ jobs:
             -f commit_message="Merge branch \"$head\" into \"$base\""
 
       - name: Create PR to merge to downstream branch
-        if: steps.auto_merge.outcome == 'failure'
+        if: steps.auto_merge.outcome == 'failure' 
         run: |
           base=${{ steps.branches.outputs.base }}
           head=${{ steps.branches.outputs.head }}
