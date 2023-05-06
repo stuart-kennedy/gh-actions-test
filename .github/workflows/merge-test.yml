@@ -10,9 +10,16 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
+      - name: Generate a token
+        id: generate_token
+        uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+          
       - name: Merge to downstream branch TEST
         env:
-          GITHUB_TOKEN: ${{ secrets.TEST_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
           currentBranch=${{ github.ref_name }}
           readarray -t branches < <(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/' | sort)
