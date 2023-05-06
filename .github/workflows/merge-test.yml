@@ -16,8 +16,6 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
           
-      - run: echo ${{ steps.app_auth.outputs.token }}
-          
       - name: Merge to downstream branch TEST
         env:
           GITHUB_TOKEN: ${{ steps.app_auth.outputs.token }}
