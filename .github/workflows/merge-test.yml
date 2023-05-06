@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Merge to downstream branch TEST
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TEST_TOKEN }}
         run: |
           currentBranch=${{ github.ref_name }}
           readarray -t branches < <(gh api /repos/${{ github.repository }}/branches --paginate --jq '.[].name' | grep -e 'release/' | sort)
