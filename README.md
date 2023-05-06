@@ -1,3 +1,3 @@
 # gh-actions-test
 
-test
+done
