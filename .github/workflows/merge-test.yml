@@ -10,7 +10,7 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
-      - name: Merge to downstream branch
+      - name: Merge to downstream branch TEST
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -25,5 +25,3 @@ jobs:
               break
             fi
           done
-
-#test
