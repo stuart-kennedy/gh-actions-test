@@ -45,7 +45,7 @@ jobs:
           gh api /repos/${{ github.repository }}/merges \
             -f base=$base \
             -f head=$head \
-            -f commit_message='Merge \'$head\' into \'$base\''
+            -f commit_message="Merge `$head` into `$base`"
 
       - name: Create PR to merge to downstream branch
         if: steps.auto_merge.outcome == 'failure'
@@ -55,8 +55,8 @@ jobs:
           gh api /repos/${{ github.repository }}/pulls \
             -f base=$base \
             -f head=$head \
-            -f title='Merge \'$head\' into \'$base\'' \
-            -f body='This pull request was automatically created as a result of a failed downstream auto-merge.'
+            -f title="Merge `$head` into `$base` \
+            -f body="This pull request was automatically created as a result of a failed downstream auto-merge."
             
       - name: Auto-merge failed
         if: steps.auto_merge.outcome == 'failure'
