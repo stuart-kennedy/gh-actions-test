@@ -18,6 +18,7 @@ jobs:
           
       - name: Merge to downstream branch
         id: auto_merge
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ steps.app_auth.outputs.token }}
         run: |
