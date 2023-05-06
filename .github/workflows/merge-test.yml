@@ -8,6 +8,8 @@ on:
 jobs:
   post_build:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     permissions:
       pull-requests: write
     steps:
@@ -47,8 +49,6 @@ jobs:
 
       - name: Create PR to merge to downstream branch
         if: steps.auto_merge.outcome == 'failure'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           base=${{ steps.branches.outputs.base }}
           head=${{ steps.branches.outputs.head }}
