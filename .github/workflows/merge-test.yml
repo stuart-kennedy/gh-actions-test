@@ -11,12 +11,11 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     permissions:
-      contents: write
       pull-requests: write
     steps:
       - name: Generate app token
         id: app_auth
-        uses: stuart-kennedy/actions/github-app-auth@v1.0.13
+        uses: stuart-kennedy/actions/github-app-auth@v1.0.14
         with:
          app-id: ${{ secrets.APP_ID }}
          private-key: ${{ secrets.APP_PRIVATE_KEY }}
