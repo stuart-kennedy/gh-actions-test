@@ -16,24 +16,24 @@ jobs:
           
       - run: |
           docker pull httpd
-          docker tag httpd system:1.123.3.44556
+          docker tag httpd system:5.6.7
       
       - uses: stuart-kennedy/actions/ecr-push@v1.0.15
         with:
           repository-url: 533930369772.dkr.ecr.ap-southeast-2.amazonaws.com/ubiquity-ci-image-cache 
-          image: system:1.123.3.44556
+          image: system:5.6.7
           tags: |
             latest
             foo
             
-      - uses: stuart-kennedy/actions/ecr-pull@v1.0.15
-        with:
-          repository-url: 533930369772.dkr.ecr.ap-southeast-2.amazonaws.com/ubiquity-ci-image-cache 
-          image: system
-          tags: |
-            1.123.3.44556
-            foo
-            bar
+#       - uses: stuart-kennedy/actions/ecr-pull@v1.0.15
+#         with:
+#           repository-url: 533930369772.dkr.ecr.ap-southeast-2.amazonaws.com/ubiquity-ci-image-cache 
+#           image: system
+#           tags: |
+#             1.123.3.44556
+#             foo
+#             bar
 
-      - run: |
-          docker image ls
+#       - run: |
+#           docker image ls
