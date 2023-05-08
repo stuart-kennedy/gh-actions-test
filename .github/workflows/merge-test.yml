@@ -1,9 +1,7 @@
 name: merge test
 
 on:
-  push:
-    branches:
-      - release/*
+  workflow_dispatch:
 
 jobs:
   post_build:
