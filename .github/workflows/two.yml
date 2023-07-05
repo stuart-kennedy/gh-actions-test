@@ -1,6 +1,8 @@
-on:
-  workflow_dispatch:
+name: two
 
+on:
+  pull_request:
+  
 jobs:
   post_build:
     runs-on: ubuntu-latest
