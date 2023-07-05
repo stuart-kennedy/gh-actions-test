@@ -1,0 +1,17 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  post_build:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Generate app token
+        id: app_auth
+        uses: stuart-kennedy/actions/github-app-auth@v1.0.14
+        with:
+         app-id: ${{ secrets.APP_ID }}
+         private-key: ${{ secrets.APP_PRIVATE_KEY }}
